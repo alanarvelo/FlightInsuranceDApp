@@ -8,7 +8,7 @@ require("babel-polyfill");
 let indexes = {};
 let accounts = [];
 const firstOracleAccount = 20;
-const lastOracleAccount = 30;
+const lastOracleAccount = 40;
 
 let config = Config['localhost'];
 let web3 = new Web3(new Web3.providers.WebsocketProvider(config.url.replace('http', 'ws')));
