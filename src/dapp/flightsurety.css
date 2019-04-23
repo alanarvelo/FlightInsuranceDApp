@@ -2,14 +2,18 @@ body {
     background-image: url('flight.jpg'); /* Source: iStockPhoto */
     background-repeat: no-repeat;
     background-size: cover;
+    /* background-position: center;  */
+    background-attachment: fixed;
 }
 
 .container {
-    margin-top: 400px;
+    margin-top: 150px;
     background-color: #000;
     opacity: 0.9;
     color: #fff;
-    padding: 40px;
+    padding: 20px;
+    margin-bottom: 150px;
+    
 }
 
 .top-20 {
@@ -39,4 +43,9 @@ label.form {
 }
 input {
     margin-right: 30px;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial;
 }

@@ -18,26 +18,25 @@ contract('Oracles', async (accounts) => {
     const STATUS_CODE_LATE_OTHER = 50;
 
   });
-
-
-  it('can register oracles', async () => {
+  
+  it('can register 20 more oracles', async () => {
     
     // ARRANGE
     let fee = await config.flightSuretyApp.REGISTRATION_FEE.call();
 
     // ACT
-    for(let a=1; a<TEST_ORACLES_COUNT; a++) {      
+    for(let a=30; a<(30+TEST_ORACLES_COUNT); a++) {      
       await config.flightSuretyApp.registerOracle({ from: accounts[a], value: fee });
       let result = await config.flightSuretyApp.getMyIndexes.call({from: accounts[a]});
-      console.log(`Oracle Registered: ${result[0]}, ${result[1]}, ${result[2]}`);
+      console.log(`Oracle ${a} Registered: ${result[0]}, ${result[1]}, ${result[2]}`);
     }
   });
 
   it('can request flight status', async () => {
     
     // ARRANGE
-    let flight = 'ND1309'; // Course number
-    let timestamp = Math.floor(Date.now() / 1000);
+    let flight = "A1"; //   Course number 'ND1309'
+    let timestamp = 1555345902  //   Math.floor(Date.now() / 1000); 
 
     // Submit a request for oracles to get status information for a flight
     await config.flightSuretyApp.fetchFlightStatus(config.firstAirline, flight, timestamp);
@@ -47,7 +46,7 @@ contract('Oracles', async (accounts) => {
     // loop through all the accounts and for each account, all its Indexes (indices?)
     // and submit a response. The contract will reject a submission if it was
     // not requested so while sub-optimal, it's a good test of that feature
-    for(let a=1; a<TEST_ORACLES_COUNT; a++) {
+    for(let a=30; a<(30+TEST_ORACLES_COUNT); a++) {
 
       // Get oracle information
       let oracleIndexes = await config.flightSuretyApp.getMyIndexes.call({ from: accounts[a]});
@@ -62,12 +61,21 @@ contract('Oracles', async (accounts) => {
           // Enable this when debugging
            console.log('\nError', idx, oracleIndexes[idx].toNumber(), flight, timestamp);
         }
-
       }
     }
-
-
   });
+
+
+  // it('10 oracles are registered at startup', async () => {
+    
+  //   // ARRANGE
+
+  //   // ACT
+  //   for(let a=20; a<40; a++) {      
+  //     let result = await config.flightSuretyApp.getMyIndexes.call({from: accounts[a]});
+  //     console.log(`Oracle ${a} Registered: ${result[0]}, ${result[1]}, ${result[2]}`);
+  //   }
+  // });
 
 
  
