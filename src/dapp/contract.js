@@ -49,6 +49,17 @@ export default class Contract {
             .call({ from: self.owner}, callback);
     }
 
+
+    opdata(callback) {
+        let self = this;
+        self.flightSuretyApp.methods
+             .isOperational()
+             .call({ from: self.owner}, function(error, result){
+                 console.log(result);
+             });
+     }
+
+
     fetchFlightStatus(flight, callback) {
         let self = this;
         let payload = {
@@ -56,6 +67,15 @@ export default class Contract {
             flight: flight,
             timestamp: 1555345902 //        Math.floor(Date.now() / 1000)
         } 
+
+        self.flightSuretyApp.events
+            .FlightStatusInfo({
+                fromBlock: 0
+                }, function (error, event) {
+                    if (error) console.log(error)
+                    console.log(event)
+                    callback(error, payload);
+                });
 
         self.flightSuretyApp.methods
             .fetchFlightStatus(payload.airline, payload.flight, payload.timestamp)
@@ -93,7 +113,8 @@ export default class Contract {
         console.log(flight, this.web3.utils.toWei(amount.toString()) );
         self.flightSuretyApp.methods
             .buyInsurance(flight)
-            .send( {from: this.passengers[0], value: this.web3.utils.toWei(amount.toString())}, (error, result) => {
+            .send( {from: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57", value: this.web3.utils.toWei(amount.toString())}, (error, result) => {
+            // .send( {from: this.passengers[0], value: this.web3.utils.toWei(amount.toString())}, (error, result) => {
                 console.log(error, result);
                 callback(error, result);
             })
@@ -111,11 +132,8 @@ export default class Contract {
             })
     }
 
-
     // (error, result) => {
     // callback(error, result)
-
-
 
 
     

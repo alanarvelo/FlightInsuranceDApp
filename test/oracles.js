@@ -66,13 +66,13 @@ contract('Oracles', async (accounts) => {
   });
 
 
-  // it('10 oracles are registered at startup', async () => {
+  // it('20 oracles are registered at startup', async () => {
     
   //   // ARRANGE
 
   //   // ACT
   //   for(let a=20; a<40; a++) {      
-  //     let result = await config.flightSuretyApp.getMyIndexes.call({from: accounts[a]});
+  //     let result = await config.flightSuretyApp.getMyIndexes({from: accounts[a]});
   //     console.log(`Oracle ${a} Registered: ${result[0]}, ${result[1]}, ${result[2]}`);
   //   }
   // });

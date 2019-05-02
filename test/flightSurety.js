@@ -101,6 +101,7 @@ contract('Flight Surety Tests', async (accounts) => {
         let insuranceAmount = await config.flightSuretyApp.isInsured("A1", {from: passenger});
 
         // ASSERT
+        // console.log(insuranceAmount.toNumber());
         assert.equal(insuranceAmount/config.weiMultiple, 1, "Passenger is not insured for FlightA1");
 
     });

@@ -10,12 +10,12 @@ import './flightsurety.css';
     let contract = new Contract('localhost', () => {
 
 
-        contract.flightSuretyApp.events.FlightStatusInfo({
-            fromBlock: 0
-        }, function (error, event) {
-            if (error) console.log(error)
-            console.log(event)
-        });
+        // contract.flightSuretyApp.events.FlightStatusInfo({
+        //     fromBlock: 0
+        // }, function (error, event) {
+        //     if (error) console.log(error)
+        //     console.log(event)
+        // });
 
         /********************************************* Operational *******************************************/
 

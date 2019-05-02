@@ -223,12 +223,21 @@ contract FlightSuretyApp {
     /**
     * @dev Buy insurance for a flight
     */   
+    // function buyInsurance(string _flight) public requireIsOperational payable {
+    //     require(msg.value <= 1 ether, "Payment invalid. Max payment is 1 ether");
+    //     bytes32 _flightKey = getFlightKey(firstAir, _flight, 1555345902);
+    //     require(flights[_flightKey].isRegistered = true, "Flight is not registered, or invalid, to purchase insurance");
+        
+    //     flightSuretyData.buyInsurance.value(msg.value)(_flightKey, msg.sender); 
+    // }
+
     function buyInsurance(string _flight) public requireIsOperational payable {
         require(msg.value <= 1 ether, "Payment invalid. Max payment is 1 ether");
-        bytes32 _flightKey = getFlightKey(firstAir, _flight, 1555345902);
-        require(flights[_flightKey].isRegistered = true, "Flight is not registered, or invalid, to purchase insurance");
-        
-        flightSuretyData.buyInsurance.value(msg.value)(_flightKey, msg.sender); 
+        firstAir = address(0xf17f52151EbEF6C7334FAD080c5704D77216b732);
+        bytes32 flightA1Key = getFlightKey(firstAir, _flight, 1555345902);
+        flights[flightA1Key] = Flight(true, STATUS_CODE_UNKNOWN, 0, firstAir);
+
+        flightSuretyData.buyInsurance.value(msg.value)(_flight, flightA1Key, msg.sender);
     }
 
     

@@ -212,11 +212,18 @@ contract FlightSuretyData {
    /**
     * @dev Buy insurance for a flight
     */   
-    function buyInsurance(bytes32 _flightKey, address _passenger) external requireIsOperational requireAuthorizedCaller payable {
-        // require(msg.value <= 1 ether, "Payment invalid. Max payment is 1 ether");
+    // function buyInsurance(bytes32 _flightKey, address _passenger) external requireIsOperational requireAuthorizedCaller payable {
+    //     // require(msg.value <= 1 ether, "Payment invalid. Max payment is 1 ether");
+
+    //     insuredPassengers[_flightKey].push(_passenger);
+    //     passengersInsurance[_flightKey][_passenger] = msg.value;
+    // }
+
+    function buyInsurance(string _flight, bytes32 _flightKey, address _passenger) public payable {
 
         insuredPassengers[_flightKey].push(_passenger);
         passengersInsurance[_flightKey][_passenger] = msg.value;
+        bool a = isRegisteredAirline(_passenger);
     }
 
 
@@ -245,9 +252,6 @@ contract FlightSuretyData {
         msg.sender.transfer(funds);
 
     }
-
-
-
 
 
 
